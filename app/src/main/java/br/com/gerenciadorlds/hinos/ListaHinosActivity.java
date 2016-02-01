@@ -99,6 +99,7 @@ public class ListaHinosActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_baixar_dados:
                 new ReceberHinosTask(this).execute();
+                carregarHinosList();
         }
 
         return super.onOptionsItemSelected(item);

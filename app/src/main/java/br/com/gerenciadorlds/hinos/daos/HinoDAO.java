@@ -18,6 +18,8 @@ import br.com.gerenciadorlds.hinos.modelo.Hino;
  */
 public class HinoDAO extends SQLiteOpenHelper {
 
+    private static final String TABELA = "hino";
+
     public HinoDAO(Context context) {
         super(context, "gerenciadorlds", null, 1);
     }
@@ -82,4 +84,13 @@ public class HinoDAO extends SQLiteOpenHelper {
         String[] params = {hino.getId().toString()};
         sq.update("hino", cv, "id = ?", params);
     }
+
+    public boolean temHino(Long id) {
+        String[] args = {id.toString()};
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT ID FROM " + TABELA + " WHERE ID = ?", args);
+        int total = cursor.getCount();
+        close();
+        return total > 0;
+    }
+
 }
